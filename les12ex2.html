@@ -1,0 +1,57 @@
+<meta charset="utf-8">
+<script>
+	
+var n = 0;
+ 
+function Random(min, max) {
+	return Math.floor(Math.random()*(max-min+1)) + min;
+}
+
+function Card() {
+	var cards = ["6", '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+	return cards[Random(0, cards.length-1)];	
+}
+
+function Summ(arr) {
+	var s = 0;
+	for(var i=0; i<arr.length; i++) {
+		var c = arr[i];
+		if((c=='J')||(c=='Q')||(c=='K')) {
+			s += 10;
+		} else if(c!='A') {
+			s+= parseInt(c);
+			} else if(s>10) {
+				s+=1;
+			} else s+=11;
+	}
+	return s;
+}
+
+function Status() {
+	return "Dealer: "+ dealer + "\nPlayer: "+ player;
+}
+
+function Status2() {
+	return "Summa Dealer: "+ Summ(dealer) + "\nSumma Player: "+ Summ(player);
+}
+
+var dealer = [Card()];
+var player = [Card(), Card()];
+var answer = '';
+
+do {
+	answer = prompt(Status() + "\nЕще карту? 1 - да, ничего - нет");
+	if(answer=='1') {
+		player.push(Card());
+	}
+	dealer.push(Card());
+} while (answer== '1');
+
+
+if (((Summ(dealer)>Summ(player))||(Summ(player)>21))&&(Summ(dealer)<=21)) {
+	alert(Status() + "\n" + Status2() + "\nВы проиграли!");
+} else if(((Summ(dealer)<Summ(player))||(Summ(dealer)>21))&&(Summ(player)<=21)) {
+	alert(Status() + "\n" + Status2() + "\nВы выиграли!");
+} else alert(Status() + "\n" + Status2() + "\nНичья!");
+
+</script>

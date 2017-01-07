@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<script>
+	
+var arr = [];
+var round = 10;
+var red = 1;
+var n = 0;
+var count = 0;
+var max_count = 0;
+
+for(var i=0; i<round; i++) {
+	n = Math.round(Math.random()*100);
+	if(n!=0) {
+		n = (n%2)*2 - 1;		// % - остаток от деления на 2
+	}
+	arr.push(n);
+}
+
+for(i=0; i<round; i++) {
+	if(arr[i]==1) {
+		count=0;
+		while((i<round)&&(arr[i]==1)) {
+			count++;
+			i++;			
+		}
+		if(count>max_count) {
+			max_count=count;
+		}
+	}
+}
+	
+alert("Max round = "+ max_count);
+alert(arr);
+
+</script>
